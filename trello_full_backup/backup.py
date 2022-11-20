@@ -122,16 +122,18 @@ def backup_card(id_card, c, attachment_size, tokenize=False):
     # Enter card directory
     os.chdir(card_name)
 
+    card_actions = download_card_actions_json(c['id'])
+
     meta_file_name = 'card.json'
     description_file_name = 'description.md'
-    actions_file_name = 'actions.json'
+    actions_file_name = 'actions-{}.json'.format(len(card_actions))
 
     print('Saving', card_name)
     print('Saving', meta_file_name, ', ', description_file_name, 'and',
           actions_file_name)
     write_file(meta_file_name, c)
     write_file(description_file_name, c['desc'], dumps=False)
-    write_file(actions_file_name, download_card_actions_json(c['id']))
+    write_file(actions_file_name, card_actions)
 
     download_attachments(c, attachment_size, tokenize)
 
@@ -156,6 +158,13 @@ def backup_board(board, args):
         'checklists=all&',
         'fields=all'
     ))).json()
+
+    # 'action_fields=all',
+    # 'card_fields=all',
+    # 'card_attachment_fields=all',
+    # 'checklists=all',
+    # 'checklist_fields=all',
+    # 'list_fields=all',
 
     board_dir = sanitize_file_name(board_details['name'])
 

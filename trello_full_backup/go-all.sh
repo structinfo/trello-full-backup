@@ -1,0 +1,1 @@
+TRELLO_API_KEY=5769b75e3bf6a2631b4a99de8723da60 TRELLO_TOKEN=f1950ab8370f93a7ad426c2a112ce02de2cca2d49bde62d32db80c4e2ab46b85 python backup.py --closed-boards --archived-lists --archived-cards --organizations --my-boards
